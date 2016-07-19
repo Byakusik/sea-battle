@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Морской бой</title>
+
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+<script src="jquery-3.0.0.min.js"></script>
+<script src="seaBattle.js?v=1"></script>
+
+
+    <div class="header">
+        <div class="title">Морской Бой</div>
+    </div>
+
+    <div class="login-form">
+        <span>Введите имя:</span>
+        <form>
+            <input type="text"/>
+        </form>
+
+        <div class="button" id="startBtn">В БОЙ!</div>
+
+        <div class="error"></div>
+    </div>
+
+    <div class="battleground">
+        <span class="turn">Ход игрока </span>
+        <div id="ground1">
+            <span class="name"></span>
+            <div class="addShips"></div>
+            <div id="field1" class="field"></div>
+        </div>
+        <div id="ground2">
+            <span class="name"></span>
+            <div class="addShips"></div>
+            <span class="tooltip"></span>
+            <div id="field2" class="field"></div>
+        </div>
+
+        <div id="restart"><a href="">Начать сначала</a></div>
+
+    </div>
+
+</body>
+</html>
