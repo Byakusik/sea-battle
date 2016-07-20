@@ -12,38 +12,53 @@
 <script src="seaBattle.js?v=1"></script>
 
 
-    <div class="header">
-        <div class="title">Морской Бой</div>
+<div class="header">
+    <div class="title">Морской Бой</div>
+</div>
+
+<!-- Форма авторизации -->
+<div class="login-form" id="loginForm">
+    <span>Введите имя:</span>
+
+    <form>
+        <input type="text"/>
+    </form>
+
+    <!-- Блок-кнопка начала игры -->
+    <div class="button" id="startBtn">В БОЙ!</div>
+
+    <!-- Блок для вывода сообщений об ошибках -->
+    <div class="error"></div>
+</div>
+
+<!-- Игровое поле -->
+<div class="battleground">
+    <!-- Блок для отображения очередности хода -->
+    <span class="turn">Ход игрока </span>
+
+    <div id="ground1">
+        <!-- Имя игрока -->
+        <span class="name"></span>
+        <!-- Блок, дублирующий корабли игрока для отображения живых/потопленных -->
+        <div class="addShips"></div>
+        <!-- Игровое поле игрока -->
+        <div id="field1" class="field"></div>
+    </div>
+    <div id="ground2">
+        <!-- Имя игрока (Компьютер) -->
+        <span class="name"></span>
+        <!-- Блок, дублирующий корабли компьютера для отображения живых/потопленных -->
+        <div class="addShips"></div>
+        <!-- Блок для отображения уведомлений (убил/ранил) -->
+        <span class="tooltip"></span>
+        <!-- Игровое поле компьютера -->
+        <div id="field2" class="field"></div>
     </div>
 
-    <div class="login-form" id="loginForm">
-        <span>Введите имя:</span>
-        <form>
-            <input type="text"/>
-        </form>
+    <!-- Кнопка перезапуска игры -->
+    <div id="restart"><a href="">Начать сначала</a></div>
 
-        <div class="button" id="startBtn">В БОЙ!</div>
-
-        <div class="error"></div>
-    </div>
-
-    <div class="battleground">
-        <span class="turn">Ход игрока </span>
-        <div id="ground1">
-            <span class="name"></span>
-            <div class="addShips"></div>
-            <div id="field1" class="field"></div>
-        </div>
-        <div id="ground2">
-            <span class="name"></span>
-            <div class="addShips"></div>
-            <span class="tooltip"></span>
-            <div id="field2" class="field"></div>
-        </div>
-
-        <div id="restart"><a href="">Начать сначала</a></div>
-
-    </div>
+</div>
 
 </body>
 </html>
