@@ -175,6 +175,7 @@ function fire(el) {
             currentShip = document.querySelectorAll('#field2 .cell.hit[name="' + cellName + '"]');
             if (shipCellsNum == currentShip.length) {
                 tooltip = 'Убил!';
+                makeUnhitable(currentShip, 2);
                 shipName = currentShip[0].getAttribute('name')[1] + currentShip[0].getAttribute('name')[2];
                 addShip = document.querySelectorAll('.battleground #ground2 .addShips .addS[name=addShip2' + shipName + ']');
                 $(addShip).removeClass('red').addClass('hit');
@@ -208,14 +209,9 @@ function pcFire() {
             } else {
                 rCell = Math.floor(Math.random() * 4) + 1;
             }
-            console.log(rCell);
+
             c = 0;p=1;
-
-
-
             while (c < 1) {
-                console.log(woundedX, woundedY);
-                console.log('aaaaaaaaaa');
                 c = 1;
 
                 if(woundedX == 1 && rCell == 4) {
@@ -240,16 +236,12 @@ function pcFire() {
                 }
 
                 if (rCell == 1 && $('.cell#c1' + woundedX + (parseInt(woundedY) - 1)).hasClass('hitable')) {
-                    console.log('rCell == 1');
                     cell = $('.cell#c1' + woundedX + (parseInt(woundedY) - 1))[0];
                 } else if (rCell == 2 && $('.cell#c1' + (parseInt(woundedX) + 1) + woundedY).hasClass('hitable')) {
-                    console.log('rCell == 2');
                     cell = $('.cell#c1' + (parseInt(woundedX) + 1) + woundedY)[0];
                 } else if (rCell == 3 && $('.cell#c1' + woundedX + (parseInt(woundedY) + 1)).hasClass('hitable')) {
-                    console.log('rCell == 3');
                     cell = $('.cell#c1' + woundedX + (parseInt(woundedY) + 1))[0];
                 } else if (rCell == 4 && $('.cell#c1' + (parseInt(woundedX) - 1) + woundedY).hasClass('hitable')) {
-                    console.log('rCell == 4');
                     cell = $('.cell#c1' + (parseInt(woundedX) - 1) + woundedY)[0];
                 } else {
                     switch (rCell) {
@@ -266,7 +258,6 @@ function pcFire() {
                     woundedX = woundedFX;
                     woundedY = woundedFY;
                 }
-                console.log('bbbb');
                 p++;
                 if (p>2) {
                     rCell = woundedDirection = Math.floor(Math.random() * 4) + 1;
@@ -276,7 +267,6 @@ function pcFire() {
         } else {
             cells = document.querySelectorAll('.battleground #ground1' + ' #field1' + ' .cell.hitable');
             cell = cells[Math.floor(Math.random() * cells.length)];
-            console.log(['N', cell]);
         }
 
         if ($(cell).hasClass('red')) {
@@ -312,7 +302,7 @@ function pcFire() {
                 addShip = document.querySelectorAll('.battleground #ground1 .addShips .addS[name=addShip1' + shipName + ']');
                 $(addShip).removeClass('red').addClass('hit');
 
-                makeUnhitable(currentShip);
+                makeUnhitable(currentShip, 1);
 
                 woundedX = '';
                 woundedY = '';
@@ -348,18 +338,22 @@ function endGame(winner) {
 
 }
 
-function makeUnhitable(aShip) {
+function makeUnhitable(aShip, id) {
     aShip.forEach(function (shipCell, i) {
         x = shipCell.getAttribute('x');
         y = shipCell.getAttribute('y');
 
-        $('.cell#c1' + x + (parseInt(y) - 1)).removeClass('hitable');
-        $('.cell#c1' + (parseInt(x) - 1) + y).removeClass('hitable');
-        $('.cell#c1' + x + (parseInt(y) + 1)).removeClass('hitable');
-        $('.cell#c1' + (parseInt(x) + 1) + y).removeClass('hitable');
-        $('.cell#c1' + (parseInt(x) + 1) + (parseInt(y) + 1)).removeClass('hitable');
-        $('.cell#c1' + (parseInt(x) - 1) + (parseInt(y) + 1)).removeClass('hitable');
-        $('.cell#c1' + (parseInt(x) + 1) + (parseInt(y) - 1)).removeClass('hitable');
-        $('.cell#c1' + (parseInt(x) - 1) + (parseInt(y) - 1)).removeClass('hitable');
+        $('.cell#c' + id + x + (parseInt(y) - 1)).removeClass('hitable').addClass('miss');
+        $('.cell#c' + id + (parseInt(x) - 1) + y).removeClass('hitable').addClass('miss');
+        $('.cell#c' + id + x + (parseInt(y) + 1)).removeClass('hitable').addClass('miss');
+        $('.cell#c' + id + (parseInt(x) + 1) + y).removeClass('hitable').addClass('miss');
+        $('.cell#c' + id + (parseInt(x) + 1) + (parseInt(y) + 1)).removeClass('hitable').addClass('miss');
+        $('.cell#c' + id + (parseInt(x) - 1) + (parseInt(y) + 1)).removeClass('hitable').addClass('miss');
+        $('.cell#c' + id + (parseInt(x) + 1) + (parseInt(y) - 1)).removeClass('hitable').addClass('miss');
+        $('.cell#c' + id + (parseInt(x) - 1) + (parseInt(y) - 1)).removeClass('hitable').addClass('miss');
+    });
+
+    aShip.forEach(function (shipCell, i) {
+        if ($(shipCell).hasClass('grey')) $(shipCell).removeClass('miss');
     });
 }
